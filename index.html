@@ -2,30 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
     <title>Практика2025</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./libs/axios.min.js"></script>
-    <script src="./libs/chart.js"></script>
-    <script src="./libs/vue.global.js"></script>
-    <script src="./libs/vue.global.prod.js"></script>
-    <script src="./libs/vue-router.global.js"></script>
-    <script src="./app/app.js"></script>
+    <link rel="stylesheet" href="./css/template.css">
+    <link rel="stylesheet" href="./css/font-awesome5.css">
+
+    <script src="./js/libs/vue.global.prod.js"></script>
+    <script src="./js/libs/vue-router.global.js"></script>
+    <script src="./js/libs/axios.min.js"></script>
+    <script src="./js/libs/chart.js"></script>
+    <script src="./js/app/app.js" type="module"></script>
 
 </head>
 <body>
     
-<div class="wrapper">
-    <div class="lt-hp"></div>
-    <div>
-        
-    <div>123</div>
+<content id="content">
+    <router-view></router-view>
+</content> 
 
-    <div>123</div>
-
-    </div>
-</div>
-<!-- 
-     -->
 </body>
 </html>
