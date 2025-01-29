@@ -1,6 +1,6 @@
 import {login} from './pages/login.js';
-// import {champaings} from './pages/champaings.js';
-// import {champaing} from './pages/champaing.js';
+import {campaings} from './pages/campaings.js';
+// import {campaing} from './pages/campaing.js';
 // import {users} from './pages/users.js';
 // import {user} from './pages/user.js';
 
@@ -13,8 +13,8 @@ export const router = VueRouter.createRouter({
     history:VueRouter.createWebHashHistory(),
     routes:[
         {path:'/', name:'Sing in', component:login },
-        // {path:'/champaings', name:'Champaings', component:champaings },
-        // {path:'/champaing/:id', name:'Champaing', component:champaing },
+        {path:'/campaings', name:'Campaings', component:campaings },
+        // {path:'/campaing/:id', name:'Campaing', component:campaing },
         // {path:'/users', name:'Users', component:users },
         // {path:'/user/:id', name:'User', component:user },
         // {path:'/ads', name:'Ads', component:ads },

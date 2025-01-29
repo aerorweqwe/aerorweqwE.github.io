@@ -2,7 +2,7 @@ import {router} from './router.js';
 // import {header} from './widgets/header.js';
 // import {search} from './widgets/search.js';
 // import {popup} from './widgets/popup.js';
-// import {msg} from './widgets/msg.js';
+import {msg} from './widgets/msg.js';
 // import {toogle} from './widgets/toogle.js';
 // import {img} from './widgets/img.js';
 
@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function(){
                 var self = this;
                 if(window.localStorage.getItem("user")) self.user= JSON.parse(window.localStorage.getItem('user'));
                     
-                route.isReady().then(()=>{    
+                router.isReady().then(()=>{    
                     if(window.localStorage.getItem("user")){
                     self.user=JSON.parse(window.localStorage.getItem("user"));
 
                     if(self.$route['path']=='/' && self.user.type=='admin'){
-                        self.page('/champaings');
-                    }else if(['/champaings','/champaing','/users','/user'].includes(self.$route['path']) && self.user.type!='admin'){
+                        self.page('/campaings');
+                    }else if(['/campaings','/campaing','/users','/user'].includes(self.$route['path']) && self.user.type!='admin'){
                         self.page('/statistics');
                     }else if(['/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
-                        self.page('/champaings');
-                    }else if(['/champaings','/champaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type!='admin'){
+                        self.page('/campaings');
+                    }else if(['/campaings','/campaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type!='admin'){
                         self.page();
-                    }else if(['/champaings','/champaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
+                    }else if(['/campaings','/campaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
                         self.page();
                     }
                 else{
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }, 50);
         },
         page:function (path=""){
-            this.$route.replace(path);
+            this.$router.push(path);
             this.title=this.$route['name'];
             document.title=this.$route['name'];
         },
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // .component('Header',header)
         // .component('popup',popup)
         // .component('search',search)
-        // .component('msg',msg)
+        .component('msg',msg)
         // .component('toogle',toogle)
         // .component('Image',img )
     .use(router)
