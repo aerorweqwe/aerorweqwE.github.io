@@ -1,4 +1,4 @@
-export const campaings ={
+export const campaigns ={
     data:function(){
         return {
             parent:"",
@@ -15,6 +15,6 @@ export const campaings ={
 
     },
     template:`
-    Campaings  
+    campaigns  
     `
 };

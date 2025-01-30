@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function(){
                 var self = this;
                 if(window.localStorage.getItem("user")) self.user= JSON.parse(window.localStorage.getItem('user'));
                     
-                router.isReady().then(()=>{    
+                route.isReady().then(()=>{    
                     if(window.localStorage.getItem("user")){
                     self.user=JSON.parse(window.localStorage.getItem("user"));
 
                     if(self.$route['path']=='/' && self.user.type=='admin'){
-                        self.page('/campaings');
-                    }else if(['/campaings','/campaing','/users','/user'].includes(self.$route['path']) && self.user.type!='admin'){
+                        self.page('/campaigns');
+                    }else if(['/campaigns','/campaign','/users','/user'].includes(self.$route['path']) && self.user.type!='admin'){
                         self.page('/statistics');
                     }else if(['/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
-                        self.page('/campaings');
-                    }else if(['/campaings','/campaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type!='admin'){
+                        self.page('/campaigns');
+                    }else if(['/campaigns','/campaign','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type!='admin'){
                         self.page();
-                    }else if(['/campaings','/campaing','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
+                    }else if(['/    ','/campaign','/users','/user', '/statistics','/payments','/sites'].includes(self.$route['path']) && self.user.type=='admin'){
                         self.page();
                     }
                 else{
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }, 50);
         },
         page:function (path=""){
-            this.$router.push(path);
+            this.$router.replace(path);
             this.title=this.$route['name'];
             document.title=this.$route['name'];
         },
@@ -112,4 +112,4 @@ document.addEventListener('DOMContentLoaded', function(){
     .use(router)
     .mount('#content')
 }
-);
+);  
