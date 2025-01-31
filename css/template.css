@@ -1,14 +1,65 @@
-body{
+
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #f0f7fa;
-    font-family: "Font Awesome 5 Brands"  sans-serif !important;;
+    box-sizing: border-box;
 }
-.lt-hp{
-    background-image: url(../image/man.jpg);
-}
-.flex{
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f7fa;
+    font-family: 'CustomFont', sans-serif; 
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+#left-area {
+    width: 40%; 
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#left-area .header {
+    width: 100%;
+    padding: 20px;
+}
+
+#left-area .form {
+    width: 100%;
+    text-align: center;
+}
+
+#right-area {
+    width: 60%;
+    height: 100vh; /* Полная высота экрана */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#right-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .w40{
     width: 40%;
@@ -27,17 +78,19 @@ body{
 }
 .form{
     padding: 20%;
+    align-content: center;
 }
 .row{
     margin: 20px;
-    display: block;
+    display: flex; 
+    flex-direction: column;
 }
 .row *{
     margin-top: 10px;
 }
 .row input{
     transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
     padding: 15px;
     background: #e3edfd;
@@ -50,7 +103,7 @@ body{
 }
 .btn{
     transition: 0.3s;
-    width: 100%; 
+    width:100%; 
     border-radius: 10px;
     padding: 15px;
     background-color: #00c477;
@@ -62,8 +115,13 @@ body{
 .btn:hover{
     background-color: #1c6885;
 }
+
+
 #right-area img {
-    width: 100%;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+
 }
 .alertMsg{
     font-size: inherit;
@@ -94,6 +152,14 @@ body{
     background-color: rgba(218, 249, 223, 0.75);
     box-shadow: 0px 0 10px 0px rgb(11 205 61 /50%);
     animation: showFromLeft 0.3s normal;
+}
+.alertMsg, .successMsg {
+    position: fixed;
+    bottom: 5%;
+    left: 2%;
+    width: auto;
+    max-width: 300px;
+    display: none;
 }
 
 @keyframes showFromLeft {
