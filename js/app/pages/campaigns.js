@@ -1,12 +1,12 @@
-export const campaigns ={
-    data:function(){
+export const campaigns = {
+    data:function() {
         return {
             parent:"",
         }
     },
     mounted:function(){
         this.parent = this.$parent.$parent;
-        
+
         if(!this.parent.user){
             this.parent.logout();
         }
@@ -14,7 +14,5 @@ export const campaigns ={
     methods:{
 
     },
-    template:`
-    campaigns  
-    `
+    template:`Campaigns`
 };
