@@ -74,10 +74,10 @@ export const campaigns = {
 
                 axios.post(this.parent.url+"/site/deleteCampaign?auth="+this.parent.user.auth,data).then(function(response){
                     if(response.data.error){
-                        self.$refs.header.msg.alertFun(response.data.error);
+                        self.$refs.header.$refs.msg.alertFun(response.data.error);
                     }else{       
-                    self.$refs.header.$refs.msg.successFun("Successfully deleted campaign!");
-                    self.get();
+                        self.$refs.header.$refs.msg.successFun("Successfully deleted campaign!");
+                        self.get();
                 }
                 }).catch(function(error){
                     console.log('error : ',error);
