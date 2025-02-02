@@ -8,7 +8,6 @@
 
 html, body {
     width: 100%;
-    height: 100%;
     overflow: hidden; 
     display: flex;
     align-items: center;
@@ -18,15 +17,11 @@ html, body {
 }
 
 #content {
-    width: 100%;
-    height: 100%;
     display: flex;
 }
 
 .flex {
     display: flex;
-    width: 100%;
-    height: 100%;
     align-items: stretch;
 }
 
@@ -74,7 +69,6 @@ html, body {
 }
 .al{
     text-align: end;
-    padding-right: 20px;
 }
 .form{
     padding: 20%;
@@ -174,4 +168,26 @@ html, body {
     90%{opacity: 0.95; margin-left: -4%;}
     95%{opacity: 0.95; margin-left: -2%;}
     100%{opacity: 1; margin-left: 0%;}
+}
+
+/* capmaigns */
+
+.inside-content{
+    width:1200px;
+    background-color: red;
+}
+.inside-content> *{
+    margin: 10px;
+}
+.wrapper{
+    width: 100%;
+}
+.al
+.ac input{
+    border-radius: 10px;
+    width: 25%;
+    height: 100%;
+    padding: 10px;
+}
+.ac input:active{
 }
