@@ -99,7 +99,7 @@ export const campaigns = {
                     <div class="w20 al ptb20">
                     
                     </div>
-                 </div>
+                </div>
 
                 <div class="table" v-if="data.items!=''">
                         <table>
@@ -153,7 +153,7 @@ export const campaigns = {
                                 </tr>
                             </tbody>   
                         </table>
-                </div>
+                 </div>
                 <div class="empty" v-if="data.items==''">
                      No items
                 </div>

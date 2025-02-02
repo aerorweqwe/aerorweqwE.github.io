@@ -7,12 +7,14 @@ export const popup ={
         active:function(o,n){
             if(o==1 && !this.fullscreen){
                 var self = this;
-                setTimeout(function(){
-                    let height = self.$ref.popup.clientHeight/2;
-                    self.top = "calc(50% - "+height+"px)";
-                }, 10);
+                this.$nextTick(function () { 
+                    if (self.$refs.popup) { 
+                        let height = self.$refs.popup.clientHeight / 2;
+                        self.top = "calc(50% - " + height + "px)";
+                    }
+                });
             }
-            if(this.fullscreen){
+            if(this.fullscreen){    
                 this.top=0;
                 this.widthVal= '100%';
                 this.ml=0;
