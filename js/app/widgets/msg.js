@@ -104,7 +104,7 @@ export const msg = {
     </div>
 
     <popup ref="confirm" :title="confirmTitle">
-        <div class=" al">
+        <div class="al">
             <i class="fas fa-info-circle"></i> {{confirm}}
             <div class="botBtns">
                 <a href="#"  class="btnS" @click.prevent="code=1">

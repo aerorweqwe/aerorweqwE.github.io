@@ -35,9 +35,9 @@ export const popup ={
                         <a href="#" @click.prevent="active=0"><i class="fas fa-window-close"></i></a>
                     </div>
                 </div>
-            </div>
-            <div class="popup-inner">
+             <div class="popup-inner">
                 <slot />
+             </div>
             </div>
         </template>
     `

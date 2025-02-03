@@ -311,21 +311,53 @@ td.id a:hover{
 }
 
 .popup{
-    width: 34%;
-    z-index: 2;
-    position: absolute;
+    z-index: 321;
     background-color: #dfe3e9;
-    padding: 10px;
+    position: absolute;
+}
+.popup .popup-inner{
+    text-align: end;
 }
 .popup-inner{
     background-color: #fafafa;
-    z-index: 2;
-    position: absolute;
-    top: calc(50% + 37px); margin-left: -250px; left: 50%; 
-    width: 34%;
+    z-index: 321;
+    height: 120px;
+}
+.popup-inner .al{}
+.popup-inner .al *{
+   margin-top:20px ; 
 }
 .head-popup{
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
+}
+
+.head-popup *{
+    margin: 5px;
+}
+.fa-window-close{
+    margin-left: 250px;
+    color: #191b1f;
+}
+.fa-window-close:hover{
+    color: #00c477;
+}
+.btnS{
+    transition: 0.3s;
+    width:100%; 
+    height: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #00c477;
+    border: none;
+    box-shadow: 2px 2px 2px #4443;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 30px;
+    margin-top: 10px;
+
+}
+.head-title{
+    font-weight: 700;
+}
+.btnS:hover{
+    background-color: #1c6885;
 }
