@@ -2,6 +2,7 @@ import {router} from './router.js';
 import {msg} from './widgets/msg.js';
 import {popup} from './widgets/popup.js'; 
 import {header} from './widgets/header.js';
+import {toogle} from './widgets/toogle.js';
 
 document.addEventListener('DOMContentLoaded', function(){
     const main = {
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 });
               },
               logout(){
-                this.user = {name:"", phonee:"", email:"", date:"", auth:""};
+                this.user = {name:"", phone:"", email:"", date:"", auth:""};
                 this.page('/');
                 window.localStorage.setItem('user','');
               },
@@ -81,10 +82,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     };
 
-    var app = Vue.createApp(main)
+    var app = Vue.createApp(main)   
     .component('Header',header)
-    .component('msg',msg)
     .component('popup',popup)
+    .component('msg',msg)
+    .component('toogle', toogle)
     .use(router)
     .mount('#content')
 });
