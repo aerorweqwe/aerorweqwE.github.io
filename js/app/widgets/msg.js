@@ -11,8 +11,11 @@ export const msg = {
             interval: ""
         };
     },
+    watch:{
+
+    },
     mounted() {
-        this.parent = this.$parent?.$parent?.$parent;
+        this.parent = this.$parent.$parent.$parent;
     },
     methods: {
         fadein(el, timeout, display) {
