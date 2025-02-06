@@ -82,7 +82,7 @@ export const campaigns = {
                 });
             }
         },
-
+        
     },  
     template:`
         <div class="inside-content">

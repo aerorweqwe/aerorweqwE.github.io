@@ -1,3 +1,7 @@
+// import { msg } from "./msg.js";
+// export default {
+//     components: { msg }
+// };
 export const header = {
     data: function(){
         return{
