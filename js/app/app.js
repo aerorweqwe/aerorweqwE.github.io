@@ -1,7 +1,7 @@
 import {router} from './router.js';
-import {msg} from './widgets/msg.js';
-import {popup} from './widgets/popup.js'; 
 import {header} from './widgets/header.js';
+import {msg} from './widgets/msg.js';
+import {popup} from './widgets/popup.js';
 import {toogle} from './widgets/toogle.js';
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     };
 
-    var app = Vue.createApp(main)   
+    var app = Vue.createApp(main)
     .component('Header',header)
     .component('popup',popup)
     .component('msg',msg)
-    .component('toogle', toogle)
+    .component('toogle',toogle)
     .use(router)
     .mount('#content')
 });

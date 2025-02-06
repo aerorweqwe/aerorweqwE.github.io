@@ -9,6 +9,7 @@ export const campaigns = {
             q:"",
             sort:"",
             loader:1,
+            iChart:-1,
             id:0,
             type:0,
             all:true
@@ -20,6 +21,8 @@ export const campaigns = {
         if(!this.parent.user){
             this.parent.logout();
         }
+        // this.$refs.msg.successFun("Successfully updated campaign!");
+        // console.log(this.parent.formData.all);
         this.get();
         this.GetFirstAndLastDate();
     },
@@ -38,7 +41,7 @@ export const campaigns = {
             var self = this;
             var data = self.parent.toFormData(self.parent.formData);
             if(this.date!="") data.append('date', this.date);
-            if(this.date2!="") data.append('date2', this.date);
+            if(this.date2!="") data.append('date2', this.date2);
             self.loader=1;
             axios.post(this.parent.url+"/site/getCampaigns?auth="+this.parent.user.auth,data).then(function(response){
                 self.data=response.data;
@@ -52,7 +55,7 @@ export const campaigns = {
             self.parent.formData.copy="";
             var data = self.parent.toFormData(self.parent.formData);
 
-            axios.post(this.parent.url+"/site/actionCampaigns?auth="+this.parent.user.auth,data).then(function(response) {
+            axios.post(this.parent.url+"/site/actionCampaign?auth="+this.parent.user.auth,data).then(function(response) {
                 self.$refs.new.active=0;
                 if(self.parent.formData.id){
                     self.$refs.header.$refs.msg.successFun("Successfully updated campaign!");
@@ -82,36 +85,37 @@ export const campaigns = {
                 });
             }
         },
-        
-    },  
+
+    },
     template:`
         <div class="inside-content">
+        <div id='spinner' v-if="loader"></div>
             <Header ref="header" />
-            <div id="spinner" v-if="loader"></div>
             <div class="wrapper">
-                <div class="flex panel">
+                <div class="flex">
                     <div class="w20 ptb30">
                         <h1>Campaigns</h1>
                     </div>
-                    <div class="w60 ptb20 ac"><input type="date" v-model="date" @change="get()" /> - <input type="date" v-model="date2" @change="get()" /></div>    
+                    <div class="w60 ptb20 ac"><input type="date" v-model="date" @change="get()" /> - <input type="date" v-model="date2" @change="get()" /></div>
                     <div class="w20 al ptb20">
-                        <a class="btnS" href="#" @click.prevent="parent.formData={};$refs.new.active=1"><i class="fas fa-plus"></i> New</a>
+                    <a class="btnS" href="#" @click.prevent="parent.formData={};$refs.new.active=1"><i class="fas fa-plus"></i> New</a> 
                     </div>
                 </div>
                 <popup ref="new" :title="(parent.formData && parent.formData.id) ? 'Edit campaign' : 'New campaign'"> 
-                        <div class="form">
-                            <from>
-                                <div class="row">
-                                    <label>Name</label>
-                                    <input type="text" v-model="parent.formData.title" required>
-                                </div>
-                                <div class="row">
-                                    <button class="btn" v-if="parent.formData && parent.formData.id">Edit</button>
-                                    <button class="btn" v-if="parent.formData && !parent.formData.id" @click.prevent="action()">Add</button>
-                                </div>
-                            </from>
+                <div class="form inner-form">
+                    <form @submit.prevent="action()" v-if="parent.formData">
+                        <div class="row">
+                            <label>Name</label>
+                            <input type="text" v-model="parent.formData.title" required>
                         </div>
-                </popup>
+            
+                        <div class="row">
+                            <button class="btn" v-if="parent.formData && parent.formData.id">Edit</button>
+                            <button class="btn" v-if="parent.formData && !parent.formData.id">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </popup>
                 <div class="table" v-if="data.items!=''">
                         <table>
                             <thead>
@@ -130,7 +134,7 @@ export const campaigns = {
                                 <tr v-for="(item,i) in data.items">
                                     <td class="id">{{item.id}}</td>
                                     <td class="id">
-                                        <toogle v-model="item.published" @update:modelValue="parent.formData = item;action();"/>
+                                    <toogle v-model="item.published" @update:modelValue="parent.formData = item;action();"/>
                                     </td>
                                     <td class="id"><router-link :to="'/campaign'+item.id">{{item.title}}</router-link></td>
                                     <td class="id">
@@ -157,7 +161,13 @@ export const campaigns = {
                                         </a>
                                     </td>
                                     <td class="actions">
-                                        <a href="" @click.prevent="parent.formData = item;del();">
+                                        <router-link :to="'/campaign/+item.id'">
+                                            <i class="fas fa-edit"></i>
+                                        </router-link>
+                                         <a href="#" @click.prevent="parent.formData = item;iChart = i;$refs.chart.active=1;line(item)">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </a>
+                                        <a href="#" @click.prevent="parent.formData = item;del();">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
