@@ -70,8 +70,7 @@ html, body {
 }
 
 #right-area {
-    width: 60%;
-    height: 100vh; /* Полная высота экрана */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -512,7 +511,6 @@ i.fa-bars{
     align-items: center;
 }
 
-/* Стили для ссылок */
 
 #menu ul li {
     display: flex;
@@ -524,7 +522,7 @@ i.fa-bars{
 
 #menu ul li a {
     text-decoration: none;
-    color: #bbb; /* Серый цвет для неактивных элементов */
+    color: #bbb; 
     transition: color 0.3s ease, border-bottom 0.3s ease;
     display: flex;
     align-items: center;
@@ -533,10 +531,9 @@ i.fa-bars{
     position: relative;
 }
 
-/* Стиль активного элемента */
 
 #menu ul li a.router-link-active {
-    color: #21c17a; /* Зеленый цвет для активной ссылки */
+    color: #21c17a; 
     font-weight: 600;
 }
 
