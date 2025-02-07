@@ -78,10 +78,12 @@ export const campaign = {
             
             axios.post(this.parent.url+"/site/actionCampaign?auth="+this.parent.user.auth.data).then(function(response){
                 self.$refs.new.active=0;
-                if(self.parent.formData.id){
-                    self.$refs.header.$ref.msg.successFun("Successfully update campaign!");
+                if(response.data.error){
+                    self.$refs.header.$refs.msg.alertFun(response.data.error);
+                }else if(self.parent.formData.id){
+                    self.$refs.header.$refs.msg.successFun("Successfully update campaign!");
                 }else{
-                    self.$refs.header.$ref.msg.successFun("Successfully added new campaign!");
+                    self.$refs.header.$refs.msg.successFun("Successfully added new campaign!");
                 }
 
                 self.get();
@@ -94,12 +96,14 @@ export const campaign = {
             self.parent.formData.copy="";
             var data = self.parent.toFormData(self.parent.formData);
             data.append('campaign',this.parent.$route.params.id);
-            axios.post(this.parent.url+"site/actionBanner?auth="+this.parent.user.auth,data).then(function(response) {  
+            axios.post(this.parent.url+"/site/actionBanner?auth="+this.parent.user.auth,data).then(function(response) {  
                 self.$refs.ad.active=0;
-                if(self.parent.formData.id){
-                    self.$refs.header.$ref.msg.successFun("Successfully update banner!");
+                if(response.data.error){
+                    self.$refs.header.$refs.msg.alertFun(response.data.error);
+                }else if(self.parent.formData.id){
+                    self.$refs.header.$refs.msg.successFun("Successfully update banner!");
                 }else{
-                    self.$refs.header.$ref.msg.successFun("Successfully added new banner!");
+                    self.$refs.header.$refs.msg.successFun("Successfully added new banner!");
                 }         
                 
                 self.get();
@@ -113,8 +117,12 @@ export const campaign = {
                 var data= self.parent.toFormData(self.parent.formData);
 
                 axios.post(this.parent.url+"/site/deleteBanner?auth="+this.parent.user.auth,data).then(function(response){
-                    self.$refs.header.$refs.msg.alertFun(response.data.error);
-                     self.get();
+                    if(response.data.error){
+                        self.$refs.header.$refs.msg.alertFun(response.data.error);
+                    }else{
+                        self.$refs.header.$refs.msg.alertFun(response.data.error);
+                        self.get();
+                    }
                 }).catch(function(error){
                     console.log('error : ',error);
                 });
@@ -235,7 +243,7 @@ export const campaign = {
                 </div>
                 <div class="w50"></div>
                 <div class="w20 al ptb20">
-                <a class="btnS" href="#" @click.prevent="parent.formData=data.info;$refs.new.active=1"><i class="fas fa-edit"></i> Edit</a> 
+                <a class="btnS" href="#" @click.prevent="parent.formData=data.info;$refs.new.active=1"><i class="fas fa-edit"></i>Edit Campaign</a> 
                 </div>
             </div>
         </div>
@@ -339,7 +347,7 @@ export const campaign = {
                         </div>
                         <div class="row">
                             <label>Image</label>
-                            <Image :modelValue="this.parent.url+'/'+parent.formData.img" @update:modelValue="parent.formData.img = $event;"/>
+                            <Image v-model="parent.formData.img" @update:modelValue="parent.formData.img = $event;"/>
                         </div>
                         <div class="row">
                             <button class="btn" v-if="parent.formData && parent.formData.id">Edit</button>
