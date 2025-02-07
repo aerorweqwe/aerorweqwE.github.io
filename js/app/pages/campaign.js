@@ -220,7 +220,7 @@ export const campaign = {
                 });
             },200);
         },
-
+        
         checkAll:function(prop){
             if(this.data.items[this.iChart].sites){
                 for(let i in this.data.items[this.iChart].sites){
@@ -251,7 +251,7 @@ export const campaign = {
             
 
                 <popup ref="chart" fullscreen="true" title="Chart">
-                    <div class="flex panel">
+                    <div class="flex panel 123">
                         <div class="w30 ptb25"><input type="date" v-model="date" @change="get()" /> - <input type="date" v-model="date2" @change="get()" /> </div>
                         <div class="w70 al">
                             <div class="flex cubes">
@@ -462,7 +462,7 @@ export const campaign = {
                             <a href="#" @click.prevent="parent.formData= item;$refs.ad.active=1; ">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="#" @click.prevent="parent.formData= item;iChart=i;$refs.chart.active=1;line(item) ">
+                            <a href="#" @click.prevent="parent.formData = item;iChart=i;$refs.chart.active=1;line(item) ">
                                 <i class="fas fa-chart-bar"></i>
                             </a>
                             <a href="#" @click.prevent="parent.formData= item;delAd(); ">
