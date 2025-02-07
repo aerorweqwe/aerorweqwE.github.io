@@ -1,4 +1,4 @@
-export const campaigns = {
+export const campaign = {
     data:function() {
         return {
             parent:"",
@@ -41,7 +41,7 @@ export const campaigns = {
             if(this.date2!="") data.append('date2', this.date2);
             data.append('id',this.parent.$route.params.id);
             self.loader=1;
-            axios.post("/site/getBanners?auth="+this.parent.user.auth,data).then(function(response){
+            axios.post(this.parent.url+"/site/getBanners?auth="+this.parent.user.auth,data).then(function(response){
                 self.loader=0;
                 self.data=response.data;
                 document.title=self.data.info.title;
@@ -223,7 +223,7 @@ export const campaigns = {
             this.get();
         }
     },
-    template:html`
+    template:`
     <div class="inside-content">
     <Header ref="header" />
         <div id='spinner' v-if="loader"></div>
@@ -339,7 +339,7 @@ export const campaigns = {
                         </div>
                         <div class="row">
                             <label>Image</label>
-                            <Image :modelValue="parent.formData.img" @update:modelValue="parent.formData.img = $event;"/>
+                            <Image :modelValue="this.parent.url+'/'+parent.formData.img" @update:modelValue="parent.formData.img = $event;"/>
                         </div>
                         <div class="row">
                             <button class="btn" v-if="parent.formData && parent.formData.id">Edit</button>
@@ -403,7 +403,7 @@ export const campaigns = {
                         <th class="id">#</th>
                         <th class="id"></th>
                         <th class="image"></th>
-                        <!--<th class="id"></th>-->
+                        <!-- <th class="image">Campaign</th>-->
                         <th>Size</th>
                         <th>Link</th>
                         <th class="id">Views</th>
@@ -414,11 +414,61 @@ export const campaigns = {
                     </tr>
                 </thead>
                 <tbody>
-                
+                    <tr v-for="(item, i) in data.items">
+                        <td class="id">{{item.id}}</td>
+                        <td class="id">
+                            <toogle :modelValue="item.published" @update:modelValue="item.published = $event;parent.formData=item;actionAd"/>
+                        </td>
+                        <td class="image">
+                            <a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">
+                                <img :src="this.parent.url+'/'+item.img" />
+                            </a>
+                        </td>
+                        <!--<td class="image"><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.campaign_title}}</a></td>-->
+                        <td class="image"><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.size}}</a></td>
+                        <td><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.link}}</a></td>
+                        <td class="id">
+                            <a href="#" @click.prevent="$refs.details.active=1;getDetails(item.id,1)">
+                                {{item.views}}
+                            </a>
+                        </td>
+                        <td class="id">
+                            <a href="#" @click.prevent="$refs.details.active=1;getDetails(item.id,2)">
+                                <template v-if="item.clicks">{{item.clicks}}</template>
+                                <template v-if="!item.clicks">0</template>
+                            </a>
+                        </td>
+                        <td class="id">
+                            <a href="#" @click.prevent="$refs.details.active=1;getDetails(item.id,3)">
+                                <template v-if="item.leads">{{item.leads}}</template>
+                                <template v-if="!item.leads">0</template>
+                            </a>
+                        </td>
+                        <td class="id">
+                            <a href="#" @click.prevent="$refs.details.active=1;getDetails(item.id,4)">
+                                <template v-if="item.fclicks">{{item.fclicks}}</template>
+                                <template v-if="!item.fclicks">0</template>
+                            </a>
+                        </td>
+                        <td class="actions">
+                            <a href="#" @click.prevent="parent.formData= item;$refs.ad.active=1; ">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" @click.prevent="parent.formData= item;iChart=i;$refs.chart.active=1;line(item) ">
+                                <i class="fas fa-chart-bar"></i>
+                            </a>
+                            <a href="#" @click.prevent="parent.formData= item;delAd(); ">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="empty" v-if="data.items==''">
+            No items
         </div>
     </div>
 `
 
-}
+};
