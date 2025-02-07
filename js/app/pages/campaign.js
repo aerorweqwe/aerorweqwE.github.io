@@ -65,7 +65,7 @@ export const campaigns = {
             if(bid!="") data.append('bid',bid);
             if(type!="") data.append('type',type);
             self.loader=1;
-            axios.post("/site/getStatisticsDetails?auth="+this.parent.user.auth,data).then(function(response){
+            axios.post(this.parent.url+"/site/getStatisticsDetails?auth="+this.parent.user.auth,data).then(function(response){
                 self.details= response.data;
                 self.loader=0;
             }).catch(function(error){
@@ -76,7 +76,7 @@ export const campaigns = {
             var self = this;
             var data = self.parent.toFormData(self.parent.formData);
             
-            axios.post("/site/actionCampaign?auth="+this.parent.user.auth.data).then(function(response){
+            axios.post(this.parent.url+"/site/actionCampaign?auth="+this.parent.user.auth.data).then(function(response){
                 self.$refs.new.active=0;
                 if(self.parent.formData.id){
                     self.$refs.header.$ref.msg.successFun("Successfully update campaign!");
@@ -94,7 +94,7 @@ export const campaigns = {
             self.parent.formData.copy="";
             var data = self.parent.toFormData(self.parent.formData);
             data.append('campaign',this.parent.$route.params.id);
-            axios.post("site/actionBanner?auth="+this.parent.user.auth,data).then(function(response) {  
+            axios.post(this.parent.url+"site/actionBanner?auth="+this.parent.user.auth,data).then(function(response) {  
                 self.$refs.ad.active=0;
                 if(self.parent.formData.id){
                     self.$refs.header.$ref.msg.successFun("Successfully update banner!");
@@ -112,7 +112,7 @@ export const campaigns = {
                 var self = this;
                 var data= self.parent.toFormData(self.parent.formData);
 
-                axios.post("/site/deleteBanner?auth="+this.parent.user.auth,data).then(function(response){
+                axios.post(this.parent.url+"/site/deleteBanner?auth="+this.parent.user.auth,data).then(function(response){
                     self.$refs.header.$refs.msg.alertFun(response.data.error);
                      self.get();
                 }).catch(function(error){
@@ -390,9 +390,34 @@ export const campaigns = {
                             </tr>
                     </tbody>
                 </table>
+                <div class="empty" v-if="details==''">
+                    No items
+                </div>
             </div>
         </popup>
 
+        <div class="table" v-if="data.items!=''">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="id">#</th>
+                        <th class="id"></th>
+                        <th class="image"></th>
+                        <!--<th class="id"></th>-->
+                        <th>Size</th>
+                        <th>Link</th>
+                        <th class="id">Views</th>
+                        <th class="id">Clicks</th>
+                        <th class="id">Leads</th>
+                        <th class="id">Fraud clicks</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+        </div>
     </div>
 `
 
