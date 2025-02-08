@@ -23,6 +23,10 @@ a:hover{
     padding-top: 30px;
     padding-bottom: 30px;
 }
+.ptb25{
+    padding: 25px;
+
+}
 .ptb20{
     padding-top: 20px;
     padding-bottom: 20px;
@@ -40,6 +44,9 @@ html, body {
 
 #content {
     display: flex;
+}
+.w80{
+    width: 80%;
 }
 .w70{
     width: 70%;
@@ -336,15 +343,14 @@ td.id a:hover{
 }
 .popup .popup-inner{
     text-align: end;
+    padding: 10px;
 }
 .popup-inner{
     background-color: #fafafa;
     z-index: 321;
-    min-height: 120px;
+    min-height: 200px;
 }
-.popup-inner .al *{
-   margin-top:20px ; 
-}
+
 
 .head-popup *{
     margin: 5px;
@@ -423,6 +429,16 @@ input:checked +.slider:before{
     -webkit-transform: translateX(16px);
     -ms-transform: translateX(16px);
     transform: translateX(16px);
+}
+
+.botBtns{
+    top: 40px;
+}
+.popup-inner .al{
+    height: 100%;
+}
+.popup-inner .al .botBtns{
+    padding-top:10%;
 }
 /*  */
 .slider.round{
@@ -573,4 +589,55 @@ select:focus {
 }
 .panelTop{
     background-color: #d5f3ec;
+}
+
+/* chart popup */
+
+.filchart{
+    background-color: #f6f6f6;
+}
+.panel{
+    height: 20%;
+}
+.panel input{
+    
+    border-radius: 10px;
+    width: 45%;
+    height: 75%;   
+    border: 1px solid #c0c0c0;
+    background-color: #f0f7fa;
+    padding: 10px;
+}
+.cubes{
+        padding: 1%;
+        align-items: center;
+        height: 100%;
+}
+.cubes .w30{
+    border: #000 1px solid;
+    font-size: 30px;
+    padding: 5px;
+}
+.cubes .w30 div{
+    font-size: 14px;
+}
+.clicks{
+    background-color: #004e93;
+    color: #fff;
+    border-radius: 10px 0 0 10px;
+}
+.views{
+    background-color: #4700ae;
+    color: #fff;
+}
+.leads{
+    background-color: #319201;
+    color: #fff;
+}
+.ctr{
+    background-color: #fefefe;
+    border-radius: 0 10px 10px 0;
+}
+.popup-inner .body{
+    height: 90%;
 }

@@ -45,6 +45,7 @@ export const campaigns = {
             self.loader=1;
             axios.post(this.parent.url+"/site/getCampaigns?auth="+this.parent.user.auth,data).then(function(response){
                 self.data=response.data;
+                if(self.iChart!=-1) self.line(self.data.items[self.iChart]);
                 self.loader=0;
             }).catch(function(error){
                 self.parent.logout();
@@ -213,7 +214,7 @@ export const campaigns = {
                                 <div class="flex cubes">
                                     <div class="w30 clicks">
                                         <div>Clicks</div>
-                                        {{data.items[iChart].click}}
+                                        {{data.items[iChart].clicks}}
                                     </div>
                                     <div class="w30 views">
                                         <div>Views</div>
