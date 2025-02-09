@@ -101,7 +101,7 @@ export const campaigns = {
                     }
                 }
 
-                document.getElementById('chartOuter').innerHTML = '<div id="chartHints"><div class="chartHintsViews">Views</div><div class="chartHintsClicks">Clicks</div><div class="chartHintsLeads">Leads</div><canvas id="myChart"></canvas></div>'
+                document.getElementById('chartOuter').innerHTML = '<div id="chartHints"><div class="chartHintsViews">Views</div><div class="chartHintsClicks">Clicks</div><canvas id="myChart"></canvas></div>'
                 const ctx = document.getElementById('myChart');
                 const xScaleImage = {
                     id:"xScaleImage",
@@ -208,7 +208,7 @@ export const campaigns = {
                         <div class="flex cubes">
                             <div class="w30 clicks">
                                 <div>Clicks</div>
-                                {{data.items[iChart].click}}
+                                {{data.items[iChart].clicks}}
                             </div>
                             <div class="w30 views">
                                 <div>Views</div>

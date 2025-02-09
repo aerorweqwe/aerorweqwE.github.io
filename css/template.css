@@ -357,7 +357,6 @@ td.id a:hover{
     margin: 5px;
 }
 .fa-window-close{
-    margin-left: 250px;
     color: #191b1f;
 }
 .fa-window-close:hover{
@@ -646,10 +645,22 @@ select:focus {
 
 
 /*chartHints  */
-
-#chartHints{
+#chartOuter {
+    padding: 5px;
+}
+#chartHints{display: flex;
+    flex-direction: column; gap: 5px;
+}
+.chartHintsClicks,
+.chartHintsViews{
     display: flex;
-}
-.chartHintsLeads{
-    display: none;
-}
+    align-items: center;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px;
+
+
+} 
+
+.chartHintsClicks{justify-content: start;}
+.chartHintsViews{justify-content: end;}

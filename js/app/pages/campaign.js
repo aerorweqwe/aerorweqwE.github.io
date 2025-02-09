@@ -111,7 +111,7 @@ export const campaign = {
                 console.log('errors: ',error);
             });
         },
-        del:async function () {
+        delAd:async function () {
             if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this banner?")){
                 var self = this;
                 var data= self.parent.toFormData(self.parent.formData);
