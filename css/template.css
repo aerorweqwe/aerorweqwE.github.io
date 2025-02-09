@@ -42,6 +42,7 @@ html, body {
     text-align: end;
 }
 
+
 #content {
     display: flex;
 }
@@ -641,4 +642,14 @@ select:focus {
 }
 .popup-inner .body{
     height: 90%;
+}
+
+
+/*chartHints  */
+
+#chartHints{
+    display: flex;
+}
+.chartHintsLeads{
+    display: none;
 }

@@ -308,7 +308,7 @@ export const campaigns = {
                                         </a>
                                     </td>
                                     <td class="actions">
-                                        <router-link :to="'/campaign/+item.id'">
+                                        <router-link :to="'/campaign/'+item.id">
                                             <i class="fas fa-edit"></i>
                                         </router-link>
                                          <a href="#" @click.prevent="parent.formData = item;iChart = i;$refs.chart.active=1;line(item)">
