@@ -396,6 +396,11 @@ export const user = {
                                 {{item.site}}
                             </td>
                             <td class="id">
+                                        <a href="#" @click.prevent="$refs.details.active=1;getDetails(item.id,2)">
+                                            {{item.views}}
+                                        </a>
+                                    </td>
+                            <td class="id">
                                     <template v-if="item.clicks">{{item.clicks}}</template>
                                     <template v-if="!item.clicks">0</template>
                             </td>
