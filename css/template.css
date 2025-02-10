@@ -501,6 +501,9 @@ header.header {
     visibility: visible;
 
 }
+.pb0{
+    padding-bottom:0 ;
+}
 #user-top{
     display: flex;
     justify-content: center;
@@ -520,7 +523,8 @@ header.header {
 i.fa-bars{
     display: none;
 }
-
+.ar{
+    align-items: right;}
 /*  */
 
 
@@ -674,4 +678,12 @@ select:focus {
 
 .row textarea{
     height: 20%;
+}
+
+.tabs ul {
+    display: flex;
+}
+.tabs ul li{
+    margin: 10px;
+    list-style: none;
 }
