@@ -1,19 +1,19 @@
 export const user = {
     data:function() {
         return{
-            parent:"",
-            data:{},
-            user:[],
-            tab:0,
-            tabs:["Statistics","Sites","Payments"],
-            date:"",
-            date2:"",
-            iChart:-1,
-            loader:1
+        parent:"",
+        data:{},
+        user:[],
+        tab:0,
+        tabs:["Statistic","Sites","Payments"],
+        date:"",
+        date2:"",
+        iChart:-1,
+        loader:1
         }
     },
-    mounted:function(){
-        this.parent=this.$parent.$parent;
+    mounted:function() {
+        this.parent = this.$parent.$parent;
 
         if(!this.parent.user){
             this.parent.logout();
@@ -22,7 +22,6 @@ export const user = {
         if(!this.parent.$route.params.id) this.parent.page('/users');
         this.get();
         this.GetFirstAndLastDate();
-
     },
     methods:{
         GetFirstAndLastDate:function(){
@@ -30,205 +29,243 @@ export const user = {
             var month = new Date().getMonth();
             var firstDayOfMonth = new Date(year, month, 2);
             var lastDayOfMonth = new Date(year, month+1, 1);
-
-            this.date = firstDayOfMonth.toISOString().substring(0,10);
-            this.date2 = lastDayOfMonth.toISOString().substring(0,10);
+            
+            this.date = firstDayOfMonth.toISOString().substring(0, 10);
+            this.date2 = lastDayOfMonth.toISOString().substring(0, 10);
         },
         get:function(){
             var self = this;
             var data = self.parent.toFormData(self.parent.formData);
-            data.append('id',this.parent.$route.params.id);
-            data.append('uid',this.parent.$route.params.id);
+            data.append('id', this.parent.$route.params.id);
+            data.append('uid', this.parent.$route.params.id);
             if(this.date!="") data.append('date', this.date);
             if(this.date2!="") data.append('date2', this.date2);
-            self.loader = 1;
-            axios.post(this.parent.url+"/site/deleteUser?auth="+this.parent.user.auth,data).then(function(response){
-                self.loader = 0;
-                self.data = response.data;
+            self.loader=1;
+            axios.post(this.parent.url+"/site/getUser?auth="+this.parent.user.auth,data).then(function(response){
+                self.loader=0;
+                self.data=response.data;
                 if(self.data.info) self.user = self.data.info;
-                document.title = self.data.info.user
+                document.title=self.data.info.user;
             }).catch(function(error){
                 self.parent.logout();
             });
         },
         action:function(){
-            var self=this;
+            var self = this;
             var data = self.parent.toFormData(self.parent.formData);
 
-            axios.post(this.parent.url+"/site/actionUser?auth="+this.parent.user.auth,data).then(function(response) {
+            axios.post(this.parent.url+"/site/actionUser?auth="+this.parent.user.auth,data).then(function(response){
                 if(response.data.error){
                     self.$refs.header.$refs.msg.alertFun(response.data.error);
                     return false;
-                }else {
-                    self.$refs.new.action=0;
+                }else{
+                    self.$refs.new.active=0;
                 }
 
                 if(self.parent.formData.id){
                     self.$refs.header.$refs.msg.successFun("Successfully updated user!");
                 }else{
-                    self.$refs.header.$refs.msg.successFun("Successfully added new user!");}
-                
+                    self.$refs.header.$refs.msg.successFun("Successfully added new user!");
+                }
+
                 self.get();
             }).catch(function(error){
-                console.log('error : ', error);
+                console.log('errors: ',error);
             });
-            },
-            del:async function () {
-                if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this user?")){
-                    var self = this;
-                    var data= self.parent.toFormData(self.parent.formData);
-    
-                    axios.post(this.parent.url+"/site/deleteUser?auth="+this.parent.user.auth,data).then(function(response){
-                            self.$refs.header.$refs.msg.successFun("Successfully deleted campaign!");
-                            self.get();
-                    
-                    }).catch(function(error){
-                        console.log('error : ',error);
-                    });
-                }
-            },
-            actionStatistics:function() {
+        },
+        del:async function () {
+            if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this user?")){
                 var self = this;
                 var data = self.parent.toFormData(self.parent.formData);
-                data.append('uid',this.parent.$route.params.id);
-                axios.post(this.parent.usl+"/site/actionStatistic?auth="+this.parent.user.auth,data).then(function(response){
+
+                axios.post(this.parent.url+"/site/deleteUser?auth="+this.parent.user.auth,data).then(function(response){  
+                    if(response.data.error){
+                        self.$refs.header.$refs.msg.alertFun(response.data.error);
+                        return false;
+                    }else{          
+                        self.$refs.header.$refs.msg.successFun("Successfully deleted user!");
+                        self.get();
+                    }
+                }).catch(function(error){
+                    console.log('errors : ', error);
+                });
+            }
+        },
+        
+        actionStatistic:function() {
+            var self = this;
+            var data = self.parent.toFormData(self.parent.formData);
+            data.append('uid',this.parent.$route.params.id);
+            axios.post(this.parent.url+"/site/deleteStatistic?auth="+this.parent.user.auth,data).then(function(response){
+                if(response.data.error){
+                 self.$refs.header.$refs.msg.alertFun(response.data.error);
+                 return false;
+                }else{
+
+                }
+
+                if(self.parent.formData.id){
+                    self.$refs.header.$refs.msg.successFun("Successfully updated banner!");
+                }else{
+                    self.$refs.header.$refs.msg.successFun("Successfully added new banner!");
+                }
+
+                self.get();
+            }).catch(function(error){
+                console.log('errors: ',error);
+            });
+        },
+
+        actionPayment:function(){
+            var self = this;
+            var data = self.parent.toFormData(self.parent.formData);
+            data.append('uid',this.parent.$route.params.id);
+            axios.post(this.parent.url+"/site/deletePayment?auth="+this.parent.user.auth,data).then(function(response){
+                if(response.data.error){
+                 self.$refs.header.$refs.msg.alertFun(response.data.error);
+                 return false;
+                }else{
+                    self.$refs.payment.active = 0;
+                }
+
+                if(self.parent.formData.id){
+                    self.$refs.header.$refs.msg.successFun("Successfully updated payment!");
+                }else{
+                    self.$refs.header.$refs.msg.successFun("Successfully added new payment!");
+                }
+
+                self.get();
+            }).catch(function(error){
+                console.log('errors: ',error);
+            });
+        },
+        dePayment:async function () {
+            if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this payment?")){
+                var self = this;
+                var data= self.parent.toFormData(self.parent.formData);
+
+                axios.post(this.parent.url+"/site/deletePayment?auth="+this.parent.user.auth,data).then(function(response){
                     if(response.data.error){
                         self.$refs.header.$refs.msg.alertFun(response.data.error);
                         return false;
                     }else{
-                        // self.$refs.payment.active=0;
-                    }
-
-                    if(self.parent.formData.id){
-                        self.$refs.header.$refs.msg.successFun("Successfully updated banner!");
-                    }else{
-                        self.$refs.header.$refs.msg.successFun("Successfully added new banner!");
-                    }
-
-                    self.get();
-                }).catch(function(error) {
-                    console.log('error : ', error);
-                });
-            },
-            delPayment:async function () {
-                if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this payment?")){
-                    var self = this;
-                    var data = self.parent.toFormData(self.parent.formData);
-                    axios.post(this.parent.usl+"/site/deletePayment?auth="+this.parent.user.auth,data).then(function(response){
-                        self.$refs.header.$refs.msg.successFun("Successfully deleted add!");
+                        self.$refs.header.$refs.msg.successFun('Successfully deleted add!');
                         self.get();
-                    }).catch(function(error) {
-                        console.log('error : ',error);
-                    })
-                }
-            },
-            actionSite:function(){
-                var self = this;
-                var data= self.parent.toFormData(self.parent.formData);
-    
-                axios.post(this.parent.url+"/site/deletePayment?auth="+this.parent.user.auth,data).then(function(response){
-                    if(self.parent.formData.id){
-                        self.$refs.header.$refs.msg.successFun("Successfully updated site!");
-                    }else {
-                        self.$refs.header.$refs.msg.successFun("Successfully added new site!");
                     }
-    
-                    self.get();
                 }).catch(function(error){
                     console.log('error : ',error);
                 });
-            },  line:function(item){
-                setTimeout(function(){
-                    let dates = [];
-                    let clicks = [];
-                    let views = [];
-                    let leads = [];
-                    if(item && item['line']){
-                        for(let i in item['line']){
-                            dates.push(i);
-    
-                            clicks.push(item['line'][i].clicks);
-                            views.push(item['line'][i].views);
-                            leads.push(item['line'][i].leads);
-                        }
+            }
+        },
+
+        actionSite:function(){
+            var self = this;
+            var data= self.parent.toFormData(self.parent.formData);
+
+            axios.post(this.parent.url+"/site/deletePayment?auth="+this.parent.user.auth,data).then(function(response){
+                if(self.parent.formData.id){
+                    self.$refs.header.$refs.msg.successFun("Successfully updated site!");
+                }else {
+                    self.$refs.header.$refs.msg.successFun("Successfully added new site!");
+                }
+
+                self.get();
+            }).catch(function(error){
+                console.log('error : ',error);
+            });
+        },
+        line:function(item){
+            setTimeout(function(){
+                let dates = [];
+                let clicks = [];
+                let views = [];
+                let leads = [];
+                if(item && item['line']){
+                    for(let i in item['line']){
+                        dates.push(i);
+
+                        clicks.push(item['line'][i].clicks);
+                        views.push(item['line'][i].views);
+                        leads.push(item['line'][i].leads);
                     }
-    
-                    document.getElementById('chartOuter').innerHTML = '<div id="chartHints"><div class="chartHintsViews">Views</div><div class="chartHintsClicks">Clicks</div><div class="chartHintsLeads">Leads</div><canvas id="myChart"></canvas></div>'
-                    const ctx = document.getElementById('myChart');
-                    const xScaleImage = {
-                        id:"xScaleImage",
-                        afterDatasetsDraw(chart,args,plugins){
-                            const {ctx,data, chartArea:{bottom}, scale:{x}} = chart;
-                            ctx.save();
-                            data.images.forEach((image,index) => {
-                                const label = new Image();
-                                label.src = image;
-    
-                                const width = 120;
-                                ctx.drawImage(label,x.getPixelForValue(index)-(width/2 ),x.top,width,width);
-                            });
-                        }
+                }
+
+                document.getElementById('chartOuter').innerHTML = '<div id="chartHints"><div class="chartHintsViews">Views</div><div class="chartHintsClicks">Clicks</div><div class="chartHintsLeads">Leads</div><canvas id="myChart"></canvas></div>'
+                const ctx = document.getElementById('myChart');
+                const xScaleImage = {
+                    id:"xScaleImage",
+                    afterDatasetsDraw(chart,args,plugins){
+                        const {ctx,data, chartArea:{bottom}, scale:{x}} = chart;
+                        ctx.save();
+                        data.images.forEach((image,index) => {
+                            const label = new Image();
+                            label.src = image;
+
+                            const width = 120;
+                            ctx.drawImage(label,x.getPixelForValue(index)-(width/2 ),x.top,width,width);
+                        });
                     }
-    
-                    new Chart(ctx, {
-                        type:'line',
-    
-                        data:{
-                            labels:dates,
+                }
+
+                new Chart(ctx, {
+                    type:'line',
+
+                    data:{
+                        labels:dates,
+                        
+                        datasets:[
+                            {
+                                    label:"Clicks",
+                                    backgroundColor:"#005990",
+                                    borderColor:"#005990",
+                                    data:clicks
+                            },
+                            {
+                                    label:"Views",
+                                    backgroundColor:"#5000B8",
+                                    borderColor:"#5000B8",
+                                    data:views,
+                                    yAxisID:'y2'
+                            },
+                        ]
                             
-                            datasets:[
-                                {
-                                        label:"Clicks",
-                                        backgroundColor:"#005990",
-                                        borderColor:"#005990",
-                                        data:clicks
-                                },
-                                {
-                                        label:"Views",
-                                        backgroundColor:"#5000B8",
-                                        borderColor:"#5000B8",
-                                        data:views,
-                                        yAxisID:'y2'
-                                },
-                            ]
-                                
-                        },
-                        options: {
-                            responsive: true,
-                            plugins:{
-                                tooltip:{
-                                    bodyFontSize: 20,
-                                    usePointStyle:true,
-                                    callbacks:{
-                                        title: (ctx) => {
-                                            return ctx[0]['dataset'].label
-                                        },
-                                    }
-                                },
-                                legend:{
-                                    display:false
+                    },
+                    options: {
+                        responsive: true,
+                        plugins:{
+                            tooltip:{
+                                bodyFontSize: 20,
+                                usePointStyle:true,
+                                callbacks:{
+                                    title: (ctx) => {
+                                        return ctx[0]['dataset'].label
+                                    },
                                 }
                             },
-                            categoryPercentage: 0.2,
-                            barPercetage: 0.8,
-    
-                            scales:{
-                                y:{
-                                    id:'y2',
-                                    position: 'right'
-                                },
-                                x:{
-                                    afterFit:(scale) => {
-                                        scale.height = 120;
-                                    }
-                                }
+                            legend:{
+                                display:false
                             }
                         },
-                    });
-                },100)
-            },
-},
-template:`
+                        categoryPercentage: 0.2,
+                        barPercetage: 0.8,
+
+                        scales:{
+                            y:{
+                                id:'y2',
+                                position: 'right'
+                            },
+                            x:{
+                                afterFit:(scale) => {
+                                    scale.height = 120;
+                                }
+                            }
+                        }
+                    },
+                });
+            },100)
+        },
+    },
+    template:`
     <div class="inside-content">
     <Header ref="header" />
         <div id='spinner' v-if="loader"></div>
