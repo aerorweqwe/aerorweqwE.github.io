@@ -31,6 +31,9 @@ a:hover{
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.pb0{
+    padding-bottom: 0;
+}
 html, body {
     width: 100%;
     overflow: hidden; 
@@ -664,3 +667,10 @@ select:focus {
 
 .chartHintsClicks{justify-content: start;}
 .chartHintsViews{justify-content: end;}
+
+
+/* user */
+
+.row textarea{
+    height: 20%;
+}
