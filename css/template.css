@@ -580,7 +580,7 @@ i.fa-bars{
     border-radius: 2px;
 }
 .image a img{
-    width: 15%;
+    width: 50px;
 }
 
 select{
@@ -684,6 +684,38 @@ select:focus {
     display: flex;
 }
 .tabs ul li{
-    margin: 10px;
+    background-color: #fefefe;
+    border-radius: 10%;
+    transition: all;
+    cursor: pointer;
+    border:1px solid #ceddd9;
+    border-bottom:4px solid #ceddd9;
     list-style: none;
+    margin-right: 10px;
+    padding: 10px;
+    transition: 0.3s;
+    color: #545454;
+    font-weight: 600;
+}
+
+.tabs ul li:hover{
+    background: none;
+    border-bottom:4px solid #21c17a;
+    color: #000;
+}
+.tabs ul li.active{
+    border-bottom:4px solid #21c17a;
+    background-color: #fefefe;
+    color: #000;
+
+}
+.w50 p {
+    margin-bottom: 10px;
+}
+.ptb15{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.pt10{
+    padding-top: 10px;
 }

@@ -371,7 +371,7 @@ export const campaign = {
                         <th class="id">#</th>
                         <th class="id"></th>
                         <th class="image"></th>
-                        <!-- <th class="image">Campaign</th>-->
+                        <th class="image">Campaign</th>
                         <th>Size</th>
                         <th>Link</th>
                         <th class="id">Views</th>
@@ -392,7 +392,7 @@ export const campaign = {
                                 <img :src="this.parent.url+'/'+item.img" />
                             </a>
                         </td>
-                        <!--<td class="image"><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.campaign_title}}</a></td>-->
+                        <td class="image"><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.campaign_title}}</a></td>
                         <td class="image"><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.size}}</a></td>
                         <td><a href="#" @click.prevent="parent.formData=item;$refs.ad.active=1;">{{item.link}}</a></td>
                         <td class="id">

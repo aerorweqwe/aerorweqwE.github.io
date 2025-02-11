@@ -1,16 +1,16 @@
 export const user = {
-    data:function() {
+        data:function() {
         return{
-        parent:"",
-        data:{},
-        user:[],
-        tab:0,
-        tabs:["Statistic","Sites","Payments"],
-        date:"",
-        date2:"",
-        iChart:-1,
-        loader:1
-        }
+            parent:"",
+            data:{},
+            user:[],
+            tab:0,
+            tabs:["Statistic","Sites","Payments"],
+            date:"",
+            date2:"",
+            iChart:-1,
+            loader:1
+            }
     },
     mounted:function() {
         this.parent = this.$parent.$parent;
@@ -103,7 +103,6 @@ export const user = {
                 }else{
 
                 }
-
                 if(self.parent.formData.id){
                     self.$refs.header.$refs.msg.successFun("Successfully updated banner!");
                 }else{
@@ -139,7 +138,7 @@ export const user = {
                 console.log('errors: ',error);
             });
         },
-        dePayment:async function () {
+        delPayment:async function () {
             if(await this.$refs.header.$refs.msg.confirmFun("Please confirm next action","Do you want to delete this payment?")){
                 var self = this;
                 var data= self.parent.toFormData(self.parent.formData);
@@ -281,7 +280,7 @@ export const user = {
                 </div>
             </div>
             <div class="flex" v-if="data && data.info">
-                <div class="w50">
+                <div class="w40">
                     <p><b>Phone:</b>{{data.info.phone}}</p>
                 </div>
                 <div class="w50">
@@ -300,7 +299,7 @@ export const user = {
     <div class="wrapper">
         <popup ref="new" :title="(parent.formData && parent.formData.id) ? 	'Edit user' : 'New user'">
             <div class="form inner-form">
-                <form @submit.prevent="action()" v-if="parent.formData">
+                <form @submit.prevent="action();" v-if="parent.formData">
                     <div class="row">
                         <label>Name</label>
                         <input type="text" v-model="parent.formData.user" required>
@@ -545,7 +544,7 @@ export const user = {
 
                             <td class="image">
                                 <a href="#" @click.prevent="parent.formData=item;$refs.img.active=1">
-                                    <img :src="item.img" />
+                                    <img :src="this.parent.url+'/'+item.img" />
                                 </a>
                             </td>
                             <td class="image">{{item.campaign_title}}</td>

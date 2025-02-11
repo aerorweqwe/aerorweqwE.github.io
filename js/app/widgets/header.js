@@ -1,7 +1,7 @@
-// import { msg } from "./msg.js";
-// export default {
-//     components: { msg }
-// };
+ import { msg } from "./msg.js";
+export default {
+    components: { msg }
+ };
 export const header = {
     data: function(){
         return{
@@ -41,11 +41,11 @@ export const header = {
                                     </ul>
 
                                     <ul :class="{active:menu==1}" v-if="parent.user && parent.user.type && parent.user.type!='admin'">
-                                        <li v-if="menu==1" class="al"><i class="fas fa-times" @click="menu=0"></i></li>
-                                        <li><router-link to="/statistics"><i class="fas fa-chart-area"> statistics</i></router-link></li>
-                                        <li><router-link to="/ads"><i class="fas fa-image"> Ads</i></router-link></li>
-                                        <li><router-link to="/sites"><i class="fas fa-chrome"> Sites</i></router-link></li>
-                                        <li><router-link to="/payments"><i class="fas fa-credit-card"> Payments</i></router-link></li>
+                                        <li v-if="menu==1" class="al"><i class=" router-link-active fas fa-times" @click="menu=0"></i></li>
+                                        <li><router-link to="/statistics"><i class=" router-link-active fas fa-chart-area"> Statistics</i></router-link></li>
+                                        <li><router-link to="/ads"><i class=" router-link-active fas fa-image"> Ads</i></router-link></li>
+                                        <li><router-link to="/sites"><i class=" router-link-active fas fa-chrome">Sites</i></router-link></li>
+                                        <li><router-link to="/payments"><i class=" router-link-active fas fa-credit-card"> Payments</i></router-link></li>
                                     </ul>
                                 </div>
                             </div>
