@@ -190,7 +190,7 @@ export const campaigns = {
         <div class="inside-content">
         <div id='spinner' v-if="loader"></div>
             <Header ref="header" />
-            <div class="wrapper">
+            <div class="wrapper column-flex">
                 <div class="flex">
                     <div class="w20 ptb30">
                         <h1>Campaigns</h1>
