@@ -192,7 +192,9 @@ html, body {
     max-width: 300px;
     display: none;
 }
-
+.empty{
+    text-align: center;
+}
 @keyframes showFromLeft {
     0%{opacity: 0; margin-left: -100%;}
     25%{opacity: 0.2; margin-left: -50%;}
@@ -738,7 +740,7 @@ select:focus {
     i.fa-bars{
         position: absolute;
         display: block;
-        top: 5%;
+        top: 6%;
         right: 15%;
     }
     #menu ul.active{
@@ -796,19 +798,19 @@ select:focus {
 .table thead th{
     padding: 10px;
 }
-.row input{
-    width: 80%;
+/* .row input{
+    width: 100%;
 }
 .btn{
-    width: 80%;
-}
-.head-popup .w80{
+    width: 100%;
+} */
+/* .head-popup .w80{
     width: 60%;
-}
+} */
 i.fa-bars {
     position: absolute;
     display: block;
-    top: 3%;
+    top: 5%;
     right: 15%;
 }
   }
@@ -831,26 +833,67 @@ i.fa-bars {
         padding: 0;
         margin: 0;
     }
-    .wrapper .flex .w70{
+    /* .wrapper .flex .w70{
         width: 50%;
-    }
+    } */
     i.fa-bars{
         top: 3%;
-        right: 34%;
+        right: 12%;
     }
     .popup{
         max-width: 100px;
     }
 }
     
-@media (max-width: 412px) {
+@media (max-width: 460px) {
     h1 {
         font-size:20px ;
     }
+    i.fa-bars{
+        right: 14%;
+    }
+    .column-flex .flex:has(input){
+        display: grid;
+        flex: none;
+        text-align:  center;
+    }
+    .column-flex .flex .w20, 
+    .column-flex .flex .w60{
+width: 100%;
+padding: 15px 5px ;
+        text-align: center;
+        
+    } 
+    .btnS{margin-right: 0;}
     .table thead th{
         padding: 4px;
         font-size: 10px;
     } 
+    #user-top{
+        width: 64px;
+        height: 64px;
+    }
+    .table tbody td{
+        padding: 4px;
+    }
+    .ac input{
+        height: auto;width: 40%;
+    }
+    .panelTop{
+        padding: 10px;
+    }
+    .panel{
+        padding: 10px;
+    }
+    .panel .w50{
+        width: 40%;
+    }
+    .panel .w20{
+        width: 30%;
+    }
+    .al a{
+        font-size: 10px;
+    }
     
   }
   
